@@ -12,8 +12,8 @@ public class ContactsApp {
         Contacts contact = new Contacts();
 
         // seeding our contacts object
-        contact.addContacts("nick", 1231231234L);
-        contact.addContacts("jackie", 9169961799L);
+        contact.addContacts("nick", "1234567890");
+        contact.addContacts("jackie", "2349876510");
 
         // asking the user if they want to add a new contact
         System.out.println("1. view contacts");
@@ -45,7 +45,7 @@ public class ContactsApp {
 
                     // aking the user for a phone number without the dashes
                     System.out.println("enter a phone number without dashes please");
-                    Long response = scanner.nextLong();
+                    String response = scanner.nextLine();
 
                     // printing out the user input to the console
                     System.out.println("your entered name is: " + res + ", and their phone number is: " + response);
