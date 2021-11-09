@@ -3,8 +3,6 @@ import java.util.HashMap;
 public class Contacts {
 
 
-
-
     // properties
     public HashMap<String, String> contact;
 
@@ -16,14 +14,15 @@ public class Contacts {
 
 
 
-    // getter
-//    public HashMap<String, Integer> getContacts() {
-//        return this.contact;
-//    }
+     // getter
+    public HashMap<String, String> getContacts() {
+        return this.contact;
+    }
 
     // setter
-    public void addContact(String name, String number) {
+    public void addContacts(String name, String number) {
         this.contact.put(name, number);
     }
+
 
 }
