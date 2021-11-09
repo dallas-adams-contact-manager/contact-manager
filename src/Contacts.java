@@ -16,5 +16,4 @@ public class Contacts {
         this.contact.put(name, number);
     }
 
-
 }
