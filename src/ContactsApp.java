@@ -18,37 +18,51 @@ public class ContactsApp {
         // checking to make sure our seeds are inside the contact object
         System.out.println(contact.getContacts());
 
+        // asking the user if they want to add a new contact
+        System.out.println("Do you want to add a new contact[s]?[y/n]");
+        String res2 = scanner.nextLine();
 
-        // setting up a boolean so the user has the option to keep ading contacts
-        boolean confirm;
+        // if the user responds yes or "y" we will run the main body of the code
+        if(res2.equalsIgnoreCase("y")) {
 
-        // while the confirm boolean is true, we will run this code
-        do {
+            // setting up a boolean so the user has the option to keep adding contacts
+            boolean confirm;
 
-            // asking the user for a name
-            System.out.println("enter a name");
-            String res = scanner.nextLine();
+            // while the confirm boolean is true, we will run this code
+            do {
 
-            // aking the user for a phone number without the dashes
-            System.out.println("enter a phone number without dashes please");
-            Long response = scanner.nextLong();
+                // asking the user for a name
+                System.out.println("enter a name");
+                String res = scanner.nextLine();
 
-            // printing out the user input to the console
-            System.out.println("your entered name is: " + res + ", and their phone number is: " + response);
-            contact.addContacts(res, response);
+                // aking the user for a phone number without the dashes
+                System.out.println("enter a phone number without dashes please");
+                Long response = scanner.nextLong();
 
-
-            // printing out the new contact object with the user inputted info
-            System.out.println(contact.getContacts());
-
-            // asking the user if they want to add another contact
-            System.out.println("would you like to input another contact?[y/n]");
-            scanner.nextLine();
-            String answer = scanner.nextLine();
-            confirm = answer.equalsIgnoreCase("y");
+                // printing out the user input to the console
+                System.out.println("your entered name is: " + res + ", and their phone number is: " + response);
+                contact.addContacts(res, response);
 
 
-        } while(confirm);
+                // printing out the new contact object with the user inputted info
+                System.out.println(contact.getContacts());
+
+                // asking the user if they want to add another contact
+                System.out.println("would you like to input another contact?[y/n]");
+                scanner.nextLine();
+                String answer = scanner.nextLine();
+                confirm = answer.equalsIgnoreCase("y");
+
+
+            } while(confirm);
+
+            // if the user doesn't want to add a new contact
+        } else {
+            System.out.println("Maybe next time...");
+        }
+
+        // showing the user their new contacts list
+        System.out.println("Your contacts list: " + contact.getContacts());
 
 
     }
