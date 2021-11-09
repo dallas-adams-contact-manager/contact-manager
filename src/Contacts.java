@@ -2,27 +2,33 @@ import java.util.HashMap;
 
 public class Contacts {
 
-
-    // properties
-    public HashMap<String, String> contact;
-
+    private String name;
+    private String number;
 
     // constructor
-    public Contacts() {
-        this.contact = new HashMap<>();
+
+    public Contacts(String name, String number) {
+        this.name = name;
+        this.number = number;
     }
-
-
 
      // getter
-    public HashMap<String, String> getContacts() {
-        return this.contact;
+    public String getName() {
+        return this.name;
     }
 
-    // setter
-    public void addContacts(String name, String number) {
-        this.contact.put(name, number);
+    public String getNumber() {
+        return this.number;
     }
 
+     //setter
+
+    public void addName(String name) {
+        this.name = name;
+    }
+
+    public void addNumber(String number) {
+        this.number = number;
+    }
 
 }
