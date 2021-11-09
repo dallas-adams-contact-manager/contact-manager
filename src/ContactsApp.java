@@ -54,6 +54,7 @@ public class ContactsApp {
                 confirm = answer.equalsIgnoreCase("y");
 
 
+                // if the user responds other than y the confirm condition becomes false and the do while loop ends
             } while(confirm);
 
             // if the user doesn't want to add a new contact
