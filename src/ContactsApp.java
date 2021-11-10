@@ -1,4 +1,5 @@
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,26 +45,17 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
-        ArrayList<Contacts> contactsList = new ArrayList<>();
-
         System.out.println("What is your name?");
         String userName = scanner.nextLine();
 
         System.out.println("What is your number?");
         String userNumber = scanner.nextLine();
-        Contacts userContact = new Contacts(userName, userNumber);
-        userContact.addName(userName);
-        userContact.addNumber(userNumber);
-        contactsList.add(userContact);
+        String userContact = userName + " | " + userNumber;
 
-        for (Contacts userInfo : contactsList) {
-            List<String> newContactList = Arrays.asList(userInfo.getName(), userInfo.getNumber());
-            Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
-        }
+        List<String> newContactList = List.of(userContact);
+        Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
 
-
-
-
+        openMenu();
     }
 
     public static void closeMenu() throws IOException {
@@ -81,12 +73,34 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
+
+
+//        InputStreamReader reader = new InputStreamReader(
+//                new FileInputStream(filename), StandardCharsets.UTF_16);
+//        BufferedReader bufferedReader = new BufferedReader(reader);
+//
+//        OutputStreamWriter writer = new OutputStreamWriter(
+//                new FileOutputStream(filename), StandardCharsets.UTF_8);
+//        BufferedWriter bufferedWriter = new BufferedWriter(writer);
         List<String> printList = Files.readAllLines(contactsTxtPath);
-        System.out.println("printList = " + printList);
+//        System.out.println("printList = " + printList);
+        System.out.format("Name | Phone number |\n");
+        System.out.println("--------------------");
+        for (String contacts : printList) {
+            System.out.printf("%s\n", contacts);
+        }
     }
 
-
     public static void main(String[] args) throws IOException {
+//        String directory = "./src/data";
+//        String filename = "contacts.txt";
+//        Path dataDirectory = Paths.get(directory);
+//        Path dataFile = Paths.get(directory, filename);
+//        Path contactsTxtPath = Paths.get(directory, filename);
+//        PrintWriter writer = new PrintWriter(filename);
+//        writer.print("");
+//        writer.close();
+//        new FileWriter(filename, false).close();
         System.out.println("Welcome to Contact Manager CLI");
         System.out.println();
         openMenu();
