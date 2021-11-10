@@ -59,7 +59,6 @@ public class ContactsApp {
 
         openMenu();
 
-
     }
 
 
@@ -67,13 +66,17 @@ public class ContactsApp {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a name to search for:");
         String inputtedName = scanner.nextLine();
+
         String directory = "./src/data";
         String filename = "contacts.txt";
         Path contactsTxtPath = Paths.get(directory, filename);
         List<String> printList = Files.readAllLines(contactsTxtPath);
 
         for (String s : printList) {
-            System.out.println(s);
+            //System.out.println(s);
+            if(s.toLowerCase(Locale.ROOT).contains(inputtedName.toLowerCase(Locale.ROOT))) {
+                System.out.println(s);
+            }
         }
 
         openMenu();
