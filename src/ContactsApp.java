@@ -22,28 +22,30 @@ public class ContactsApp {
         switch (userChoice) {
             case 1 -> viewContacts();
             case 2 -> addContacts();
-//            case 3 -> searchContact();
+            case 3 -> searchContact();
 //            case 4 -> deleteContact();
             case 5 -> closeMenu();
             default -> openMenu();
         }
+
 
     }
 
     public static void viewContacts() throws IOException {
         printContacts();
 
+
         openMenu();
     }
 
+    // method to add a contact
     public static void addContacts() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         String directory = "./src/data";
         String filename = "contacts.txt";
-        Path dataDirectory = Paths.get(directory);
-        Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
+
 
         System.out.println("What is your name?");
         String userName = scanner.nextLine();
@@ -56,7 +58,36 @@ public class ContactsApp {
         Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
 
         openMenu();
+
     }
+
+
+    public static void searchContact() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a name to search for:");
+        String inputtedName = scanner.nextLine();
+
+        String directory = "./src/data";
+        String filename = "contacts.txt";
+        Path contactsTxtPath = Paths.get(directory, filename);
+        List<String> printList = Files.readAllLines(contactsTxtPath);
+
+        for (String s : printList) {
+            //System.out.println(s);
+            if(s.toLowerCase(Locale.ROOT).contains(inputtedName.toLowerCase(Locale.ROOT))) {
+                System.out.println(s);
+            }
+        }
+
+        openMenu();
+    }
+
+    // method to delete a contact
+    public static void deleteContact() {
+
+        System.out.println("Delete contact...");
+    }
+
 
     public static void closeMenu() throws IOException {
 
@@ -74,6 +105,7 @@ public class ContactsApp {
         Path contactsTxtPath = Paths.get(directory, filename);
 
         List<String> printList = Files.readAllLines(contactsTxtPath);
+
 
         System.out.format("Name | Phone number |\n");
         System.out.println("--------------------");
