@@ -1,4 +1,5 @@
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,32 +45,23 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
-        ArrayList<Contacts> contactsList = new ArrayList<>();
-
         System.out.println("What is your name?");
         String userName = scanner.nextLine();
 
         System.out.println("What is your number?");
         String userNumber = scanner.nextLine();
-        Contacts userContact = new Contacts(userName, userNumber);
-        userContact.addName(userName);
-        userContact.addNumber(userNumber);
-        contactsList.add(userContact);
+        String userContact = userName + " | " + userNumber;
 
-        for (Contacts userInfo : contactsList) {
-            List<String> newContactList = Arrays.asList(userInfo.getName(), userInfo.getNumber());
-            Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
-        }
+        List<String> newContactList = List.of(userContact);
+        Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
 
-
-
-
+        openMenu();
     }
 
     public static void closeMenu() throws IOException {
+
         System.out.println("Thanks for using Contact Manager, here is a list of your contacts:");
         System.out.println();
-
         printContacts();
 
     }
@@ -82,11 +74,16 @@ public class ContactsApp {
         Path contactsTxtPath = Paths.get(directory, filename);
 
         List<String> printList = Files.readAllLines(contactsTxtPath);
-        System.out.println("printList = " + printList);
+
+        System.out.format("Name | Phone number |\n");
+        System.out.println("--------------------");
+        for (String contacts : printList) {
+            System.out.printf("%s\n", contacts);
+        }
     }
 
-
     public static void main(String[] args) throws IOException {
+
         System.out.println("Welcome to Contact Manager CLI");
         System.out.println();
         openMenu();
