@@ -1,28 +1,42 @@
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ContactsApp {
 
+    public static void openMenu() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println();
+        System.out.println("""
+            1. View Contacts
+            2. Add a new contact
+            3. Search a contact by name
+            4. Delete an existing contact
+            5. Exit
+            """);
+        int userChoice = scanner.nextInt();
+        switch (userChoice) {
+            case 1 -> viewContacts();
+            case 2 -> addContacts();
+            case 3 -> searchContact();
+//            case 4 -> deleteContact();
+            case 5 -> closeMenu();
+            default -> openMenu();
+        }
 
-    // method that prompts the user
-    public static void initialUserPrompt() {
-
-        System.out.println("1. View contacts");
-        System.out.println("2. Add a new contact");
-        System.out.println("3. Search a contact by name");
-        System.out.println("4. Delete a contact");
-        System.out.println("5. Exit");
-        System.out.println("Enter an option(1, 2, 3, 4, or 5)");
 
     }
 
+    public static void viewContacts() throws IOException {
+        printContacts();
+
+
+        openMenu();
+    }
 
     // method to add a contact
     public static void addContacts() throws IOException {
@@ -31,91 +45,77 @@ public class ContactsApp {
         String directory = "./src/data";
         String filename = "contacts.txt";
         Path contactsTxtPath = Paths.get(directory, filename);
-        ArrayList<Contacts> contactsList = new ArrayList<>();
+
 
         System.out.println("What is your name?");
         String userName = scanner.nextLine();
 
         System.out.println("What is your number?");
         String userNumber = scanner.nextLine();
-        Contacts userContact = new Contacts(userName, userNumber);
-        userContact.addName(userName);
-        userContact.addNumber(userNumber);
-        contactsList.add(userContact);
+        String userContact = userName + " | " + userNumber;
 
-        for (Contacts userInfo : contactsList) {
-            List<String> newContactList = Arrays.asList(userInfo.getName(), userInfo.getNumber());
-            Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
-        }
+        List<String> newContactList = List.of(userContact);
+        Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
 
-        List<String> printList = Files.readAllLines(contactsTxtPath);
-        System.out.println("printList = " + printList);
+        openMenu();
+
 
     }
 
-    // method to get all contacts
-    public static void getAllContacts() throws IOException {
+
+    public static void searchContact() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a name to search for:");
+        String inputtedName = scanner.nextLine();
         String directory = "./src/data";
         String filename = "contacts.txt";
         Path contactsTxtPath = Paths.get(directory, filename);
         List<String> printList = Files.readAllLines(contactsTxtPath);
 
-        for(int i = 0; i < printList.size(); i++) {
-            System.out.println((i + 1) + ": " + printList.get(i));
+        for (String s : printList) {
+            System.out.println(s);
         }
 
-    }
-
-    public static void findContactByName() throws IOException {
-        String directory = "./src/data";
-        String filename = "contacts.txt";
-        Path contactsTxtPath = Paths.get(directory, filename);
-        List<String> printList = Files.readAllLines(contactsTxtPath);
-//        List<String> nameList = Files.readAllLines(contactsTxtPath.getName());
-
-        for(int i = 0; i < printList.size(); i++) {
-            System.out.println(printList);
-        }
+        openMenu();
     }
 
     // method to delete a contact
-    public static void deleteAContact() {
+    public static void deleteContact() {
 
         System.out.println("Delete contact...");
     }
 
+
+    public static void closeMenu() throws IOException {
+
+        System.out.println("Thanks for using Contact Manager, here is a list of your contacts:");
+        System.out.println();
+        printContacts();
+
+    }
+
+    private static void printContacts() throws IOException {
+        String directory = "./src/data";
+        String filename = "contacts.txt";
+        Path dataDirectory = Paths.get(directory);
+        Path dataFile = Paths.get(directory, filename);
+        Path contactsTxtPath = Paths.get(directory, filename);
+
+        List<String> printList = Files.readAllLines(contactsTxtPath);
+
+
+        System.out.format("Name | Phone number |\n");
+        System.out.println("--------------------");
+        for (String contacts : printList) {
+            System.out.printf("%s\n", contacts);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 
-        // initializing a scanner in the main method
-        Scanner sc = new Scanner(System.in);
-
-        // boolean used to determine if the user wants to continue
-        boolean confirm;
-
-        do{
-            initialUserPrompt();
-            String res = sc.nextLine();
-            if(res.equalsIgnoreCase("1")) {
-                getAllContacts();
-            } else if(res.equalsIgnoreCase("2")) {
-                addContacts();
-            } else if(res.equalsIgnoreCase("3")) {
-                findContactByName();
-            } else if(res.equalsIgnoreCase("4")) {
-                deleteAContact();
-            } else if(res.equalsIgnoreCase("5")) {
-                System.out.println("Exiting now, thanks for updating your contacts!");
-                break;
-            }
-
-            // asking the user if they want to continue
-            System.out.println("Want to continue?[y/n]");
-            String res2 = sc.nextLine();
-            confirm = res2.equalsIgnoreCase("y");
-
-        } while(confirm);
-
-
+        System.out.println("Welcome to Contact Manager CLI");
+        System.out.println();
+        openMenu();
 
 
     }
