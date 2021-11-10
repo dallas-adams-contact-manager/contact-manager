@@ -59,9 +59,9 @@ public class ContactsApp {
     }
 
     public static void closeMenu() throws IOException {
+
         System.out.println("Thanks for using Contact Manager, here is a list of your contacts:");
         System.out.println();
-
         printContacts();
 
     }
@@ -73,17 +73,8 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
-
-
-//        InputStreamReader reader = new InputStreamReader(
-//                new FileInputStream(filename), StandardCharsets.UTF_16);
-//        BufferedReader bufferedReader = new BufferedReader(reader);
-//
-//        OutputStreamWriter writer = new OutputStreamWriter(
-//                new FileOutputStream(filename), StandardCharsets.UTF_8);
-//        BufferedWriter bufferedWriter = new BufferedWriter(writer);
         List<String> printList = Files.readAllLines(contactsTxtPath);
-//        System.out.println("printList = " + printList);
+
         System.out.format("Name | Phone number |\n");
         System.out.println("--------------------");
         for (String contacts : printList) {
@@ -92,15 +83,7 @@ public class ContactsApp {
     }
 
     public static void main(String[] args) throws IOException {
-//        String directory = "./src/data";
-//        String filename = "contacts.txt";
-//        Path dataDirectory = Paths.get(directory);
-//        Path dataFile = Paths.get(directory, filename);
-//        Path contactsTxtPath = Paths.get(directory, filename);
-//        PrintWriter writer = new PrintWriter(filename);
-//        writer.print("");
-//        writer.close();
-//        new FileWriter(filename, false).close();
+
         System.out.println("Welcome to Contact Manager CLI");
         System.out.println();
         openMenu();
