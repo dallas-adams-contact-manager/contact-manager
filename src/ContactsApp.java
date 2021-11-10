@@ -60,38 +60,52 @@ public class ContactsApp {
     }
 
 
+    // method to search contacts by name
     public static void searchContact() throws IOException {
+
+        // scanner set up
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a name to search for:");
         String inputtedName = scanner.nextLine();
 
+        // getting our filepath and setting up list that contains data
         String directory = "./src/data";
         String filename = "contacts.txt";
         Path contactsTxtPath = Paths.get(directory, filename);
         List<String> printList = Files.readAllLines(contactsTxtPath);
 
+        // looping through our list to check data to the user input
         for (String s : printList) {
+            // if our list contains user input, print user inputted name and number
             if(s.toLowerCase(Locale.ROOT).contains(inputtedName.toLowerCase(Locale.ROOT))) {
                 System.out.println(s);
             }
         }
+
+        // return to the open menu
         openMenu();
     }
 
     // method to delete a contact
     public static void deleteContact() throws IOException {
 
+        // setting up a scasnner
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a name to delete:");
         String inputtedName = scanner.nextLine();
 
+        // getting our file path
         String directory = "./src/data";
         String filename = "contacts.txt";
         Path contactsTxtPath = Paths.get(directory, filename);
+
+        // getting a list of our stored data
         List<String> printList = Files.readAllLines(contactsTxtPath);
 
+        // removing an item based on the user input
         printList.removeIf(s -> s.toLowerCase(Locale.ROOT).contains(inputtedName.toLowerCase(Locale.ROOT)));
 
+        // rewriting our new list without the deleted user inputted data
         Files.write(contactsTxtPath, printList);
         System.out.println("Deleting contact " + inputtedName + " from records.");
 
