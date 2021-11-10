@@ -23,7 +23,7 @@ public class ContactsApp {
             case 1 -> viewContacts();
             case 2 -> addContacts();
             case 3 -> searchContact();
-//            case 4 -> deleteContact();
+            case 4 -> deleteContact();
             case 5 -> closeMenu();
             default -> openMenu();
         }
@@ -33,8 +33,6 @@ public class ContactsApp {
 
     public static void viewContacts() throws IOException {
         printContacts();
-
-
         openMenu();
     }
 
@@ -73,19 +71,32 @@ public class ContactsApp {
         List<String> printList = Files.readAllLines(contactsTxtPath);
 
         for (String s : printList) {
-            //System.out.println(s);
             if(s.toLowerCase(Locale.ROOT).contains(inputtedName.toLowerCase(Locale.ROOT))) {
                 System.out.println(s);
             }
         }
-
         openMenu();
     }
 
     // method to delete a contact
-    public static void deleteContact() {
+    public static void deleteContact() throws IOException {
 
-        System.out.println("Delete contact...");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a name to delete:");
+        String inputtedName = scanner.nextLine();
+
+        String directory = "./src/data";
+        String filename = "contacts.txt";
+        Path contactsTxtPath = Paths.get(directory, filename);
+        List<String> printList = Files.readAllLines(contactsTxtPath);
+
+        printList.removeIf(s -> s.toLowerCase(Locale.ROOT).contains(inputtedName.toLowerCase(Locale.ROOT)));
+
+        Files.write(contactsTxtPath, printList);
+        System.out.println("Deleting contact " + inputtedName + " from records.");
+
+        openMenu();
+
     }
 
 
