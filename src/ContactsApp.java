@@ -10,6 +10,30 @@ import java.util.Scanner;
 
 public class ContactsApp {
 
+    public static void openMenu() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to Contact Manager CLI");
+        System.out.println();
+        System.out.println("""
+                1. View Contacts
+                2. Add a new contact
+                3. Search a contact by name
+                4. Delete an existing contact
+                5. Exit
+                """);
+
+        int userChoice = scanner.nextInt();
+
+        switch (userChoice) {
+            case 1 -> viewContacts();
+            case 2 -> addContacts();
+            case 3 -> searchContact();
+            case 4 -> deleteContact();
+            case 5 -> closeMenu();
+            default -> openMenu();
+        }
+    }
 
 
 
@@ -46,15 +70,14 @@ public class ContactsApp {
 
     }
 
+    public static void viewContacts() {
+
+    }
+
     public static void main(String[] args) throws IOException {
-        addContacts();
+        openMenu();
 
-
-
-
-
-//
-
+//        addContacts();
 
     }
 }
