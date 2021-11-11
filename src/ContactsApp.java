@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class ContactsApp {
@@ -52,30 +53,29 @@ public class ContactsApp {
         String userNumber = scanner.nextLine();
         String userContact = userName + " | " + userNumber;
 
-        Contacts newUserContact = new Contacts(userName, userNumber);
 
-        HashMap<String, String> newerUserContact = new HashMap<>();
-        try{
-            BufferedWriter bf = new BufferedWriter(new FileWriter(String.valueOf(contactsTxtPath)));
-//        bf.close();
-            newerUserContact.put(userName, userNumber);
-            for (Map.Entry<String, String> entry : newerUserContact.entrySet()) {
-                System.out.println("entry.getKey() = " + entry.getKey());
-                System.out.println("entry.getValue() = " + entry.getValue());
-                bf.write(entry.getKey() + " | " + entry.getValue());
-                bf.newLine();
+//        Contacts newUserContact = new Contacts(userName, userNumber);
 
-            }
-            bf.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+//        HashMap<String, String> newerUserContact = new HashMap<>();
+//        try{
+//            BufferedWriter bf = new BufferedWriter(new FileWriter(String.valueOf(contactsTxtPath)));
+////        bf.close();
+//            newerUserContact.put(userName, userNumber);
+//            for (Map.Entry<String, String> entry : newerUserContact.entrySet()) {
+//                System.out.println("entry.getKey() = " + entry.getKey());
+//                System.out.println("entry.getValue() = " + entry.getValue());
+//                bf.write(entry.getKey() + " | " + entry.getValue(), StandardOpenOption.APPEND);
+//                bf.newLine();
+//
+//            }
+//            bf.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 //        Files.write(contactsTxtPath, (Iterable<? extends CharSequence>) newerUserContact, StandardOpenOption.APPEND);
 
-//        List<String> newContactList = List.of(userContact);
-//        Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
+        List<String> newContactList = List.of(userContact);
+        Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
 
         openMenu();
 
@@ -154,6 +154,7 @@ public class ContactsApp {
 //        ArrayList<Contacts> printList = new ArrayList<>();
 
 
+//        String[] printList = HashMapFromTextFile();
         List<String> printList = Files.readAllLines(contactsTxtPath);
         String nameAndNumber = "Name | Phone Number";
 
@@ -163,35 +164,38 @@ public class ContactsApp {
         for (String contacts : printList) {
             System.out.printf("%30s\n", contacts);
         }
-//        for (String contact : printList) {
-//            System.out.println(contact);
+//        for (int i = 0; i < printList.length; i++) {
+//            System.out.printf("%s | %s", printList[0], printList[1]);
 //        }
     }
 
-    public static void HashMapFromTextFile() {
-        String directory = "./src/data";
-        String filename = "contacts.txt";
-        Path dataDirectory = Paths.get(directory);
-        Path dataFile = Paths.get(directory, filename);
-        Path contactsTxtPath = Paths.get(directory, filename);
+//    public static String[] HashMapFromTextFile() throws IOException {
+//        String directory = "./src/data";
+//        String filename = "contacts.txt";
+//        Path dataDirectory = Paths.get(directory);
+//        Path dataFile = Paths.get(directory, filename);
+//        Path contactsTxtPath = Paths.get(directory, filename);
+//
+//        Map<String, String> contactFile = new HashMap<>();
+//
+//        BufferedReader br = new BufferedReader(new FileReader(String.valueOf(contactsTxtPath)));
+//        String line = null;
+//        String[] contact = new String[2];
+//        while ((line = br.readLine()) != null) {
+//            String[] parts = line.split("\\|");
+//            String name = parts[0].trim();
+//            String number = parts[1].trim();
+//
+//             contact[0] = name;
+//             contact[1] = number;
+//            if (!name.equals("") && !number.equals("")) {
+//                contactFile.put(name, number);
+//            }
+//
+//        }
+//        return contact;
+//    }
 
-        Map<String, String> contactFile = new HashMap<>();
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(String.valueOf(contactsTxtPath)));
-            String line = null;
-            while((line = br.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                String name = parts[0].trim();
-                String number = parts[1].trim();
-
-                if (!name.equals("") && !number.equals("")) {
-                    contactFile.put(name, number);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String[] args) throws IOException {
 
