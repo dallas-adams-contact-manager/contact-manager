@@ -8,6 +8,7 @@ import java.util.*;
 
 public class ContactsApp {
 
+    // starting menu
     public static void openMenu() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println();
@@ -31,6 +32,7 @@ public class ContactsApp {
 
     }
 
+    // view contacts
     public static void viewContacts() throws IOException {
         printContacts();
         openMenu();
@@ -58,7 +60,6 @@ public class ContactsApp {
         openMenu();
 
     }
-
 
     // method to search contacts by name
     public static void searchContact() throws IOException {
@@ -113,7 +114,7 @@ public class ContactsApp {
 
     }
 
-
+    // end application
     public static void closeMenu() throws IOException {
 
         System.out.println("Thanks for using Contact Manager, here is a list of your contacts:");
@@ -122,6 +123,7 @@ public class ContactsApp {
 
     }
 
+    // print contacts
     private static void printContacts() throws IOException {
         String directory = "./src/data";
         String filename = "contacts.txt";
@@ -131,11 +133,13 @@ public class ContactsApp {
 
         List<String> printList = Files.readAllLines(contactsTxtPath);
 
+        String nameAndNumber = "Name | Phone Number";
 
-        System.out.format("Name | Phone number |\n");
-        System.out.println("--------------------");
+
+        System.out.printf("%32s\n", nameAndNumber);
+        System.out.println("            ---------------------");
         for (String contacts : printList) {
-            System.out.printf("%s\n", contacts);
+            System.out.printf("%30s\n", contacts);
         }
     }
 
@@ -144,7 +148,6 @@ public class ContactsApp {
         System.out.println("Welcome to Contact Manager CLI");
         System.out.println();
         openMenu();
-
 
     }
 }
