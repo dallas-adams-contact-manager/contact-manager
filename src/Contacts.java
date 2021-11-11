@@ -2,8 +2,8 @@ import java.util.HashMap;
 
 public class Contacts {
 
-    private String name;
-    private String number;
+    protected String name;
+    protected String number;
 
     // constructor
 
