@@ -54,25 +54,6 @@ public class ContactsApp {
         String userContact = userName + " | " + userNumber;
 
 
-//        Contacts newUserContact = new Contacts(userName, userNumber);
-
-//        HashMap<String, String> newerUserContact = new HashMap<>();
-//        try{
-//            BufferedWriter bf = new BufferedWriter(new FileWriter(String.valueOf(contactsTxtPath)));
-////        bf.close();
-//            newerUserContact.put(userName, userNumber);
-//            for (Map.Entry<String, String> entry : newerUserContact.entrySet()) {
-//                System.out.println("entry.getKey() = " + entry.getKey());
-//                System.out.println("entry.getValue() = " + entry.getValue());
-//                bf.write(entry.getKey() + " | " + entry.getValue(), StandardOpenOption.APPEND);
-//                bf.newLine();
-//
-//            }
-//            bf.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Files.write(contactsTxtPath, (Iterable<? extends CharSequence>) newerUserContact, StandardOpenOption.APPEND);
 
         List<String> newContactList = List.of(userContact);
         Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
@@ -134,7 +115,7 @@ public class ContactsApp {
 
     }
 
-    // end application
+    // end application method
     public static void closeMenu() throws IOException {
 
         System.out.println("Thanks for using Contact Manager, here is a list of your contacts:");
@@ -143,7 +124,7 @@ public class ContactsApp {
 
     }
 
-    // print contacts
+    // print contacts method
     private static void printContacts() throws IOException {
         String directory = "./src/data";
         String filename = "contacts.txt";
@@ -151,11 +132,7 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
-//        ArrayList<Contacts> printList = new ArrayList<>();
-
-
-//        String[] printList = HashMapFromTextFile();
-        List<String> printList = Files.readAllLines(contactsTxtPath);
+\        List<String> printList = Files.readAllLines(contactsTxtPath);
         String nameAndNumber = "Name | Phone Number";
 
 
@@ -164,39 +141,8 @@ public class ContactsApp {
         for (String contacts : printList) {
             System.out.printf("%30s\n", contacts);
         }
-//        for (int i = 0; i < printList.length; i++) {
-//            System.out.printf("%s | %s", printList[0], printList[1]);
-//        }
     }
-
-//    public static String[] HashMapFromTextFile() throws IOException {
-//        String directory = "./src/data";
-//        String filename = "contacts.txt";
-//        Path dataDirectory = Paths.get(directory);
-//        Path dataFile = Paths.get(directory, filename);
-//        Path contactsTxtPath = Paths.get(directory, filename);
-//
-//        Map<String, String> contactFile = new HashMap<>();
-//
-//        BufferedReader br = new BufferedReader(new FileReader(String.valueOf(contactsTxtPath)));
-//        String line = null;
-//        String[] contact = new String[2];
-//        while ((line = br.readLine()) != null) {
-//            String[] parts = line.split("\\|");
-//            String name = parts[0].trim();
-//            String number = parts[1].trim();
-//
-//             contact[0] = name;
-//             contact[1] = number;
-//            if (!name.equals("") && !number.equals("")) {
-//                contactFile.put(name, number);
-//            }
-//
-//        }
-//        return contact;
-//    }
-
-
+// main method
     public static void main(String[] args) throws IOException {
 
         System.out.println("Welcome to Contact Manager CLI");
