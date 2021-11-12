@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -53,6 +52,8 @@ public class ContactsApp {
         System.out.println("What is your number?");
         String userNumber = scanner.nextLine();
         String userContact = userName + " | " + userNumber;
+
+
 
         List<String> newContactList = List.of(userContact);
         Files.write(contactsTxtPath, newContactList, StandardOpenOption.APPEND);
@@ -114,7 +115,7 @@ public class ContactsApp {
 
     }
 
-    // end application
+    // end application method
     public static void closeMenu() throws IOException {
 
         System.out.println("Thanks for using Contact Manager, here is a list of your contacts:");
@@ -123,7 +124,7 @@ public class ContactsApp {
 
     }
 
-    // print contacts
+    // print contacts method
     private static void printContacts() throws IOException {
         String directory = "./src/data";
         String filename = "contacts.txt";
@@ -131,8 +132,7 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
-        List<String> printList = Files.readAllLines(contactsTxtPath);
-
+\        List<String> printList = Files.readAllLines(contactsTxtPath);
         String nameAndNumber = "Name | Phone Number";
 
 
@@ -142,7 +142,7 @@ public class ContactsApp {
             System.out.printf("%30s\n", contacts);
         }
     }
-
+// main method
     public static void main(String[] args) throws IOException {
 
         System.out.println("Welcome to Contact Manager CLI");
