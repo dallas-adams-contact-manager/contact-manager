@@ -132,7 +132,7 @@ public class ContactsApp {
         Path dataFile = Paths.get(directory, filename);
         Path contactsTxtPath = Paths.get(directory, filename);
 
-\        List<String> printList = Files.readAllLines(contactsTxtPath);
+        List<String> printList = Files.readAllLines(contactsTxtPath);
         String nameAndNumber = "Name | Phone Number";
 
 
